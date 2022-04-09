@@ -26,6 +26,7 @@ router.get("/iniciarsesion/:email/:password", async (req, res, next) => {
 });
 
 router.get("/usuarios", async (req, res, next) => {
+  console.log("###usuarios")
   try {
     let usuarios = await Usuario.findAll();
     res.send(usuarios);

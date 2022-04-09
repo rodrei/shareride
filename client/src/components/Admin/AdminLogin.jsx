@@ -5,11 +5,14 @@ import fondo from "../../assets/fondo perfil.jpg";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import "./Admin.css";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 export default function Admin() {
   const navigate = useNavigate();
   const [input, setInput] = useState({ email: "", password: "" });
   const [statePassword, setStatePassword] = useState(false);
+
+  const cookies = new Cookies();
 
   async function iniciarSesion(input) {
     const response = await axios({
@@ -20,8 +23,10 @@ export default function Admin() {
         password: input.password,
       },
     });
+
     if (response.data === "Admin inicia sesion") {
       navigate("/adminusuarios");
+      cookies.set("admin", "true")
     } else {
       swal({
         title: "Alto!",
